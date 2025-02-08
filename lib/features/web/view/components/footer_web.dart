@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:porto_mobile_app/core/constant/style/app_colors.dart';
 import 'package:porto_mobile_app/model/social_media_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constant/style/app_text.dart';
 
-class FooterWeb extends StatelessWidget {
+class FooterWeb extends StatefulWidget {
   const FooterWeb({super.key});
+
+  @override
+  State<FooterWeb> createState() => _FooterWebState();
+}
+
+class _FooterWebState extends State<FooterWeb> {
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +49,23 @@ class FooterWeb extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: SocialMediaModel.listSosmed
                     .map(
-                      (e) => Container(
-                        margin: EdgeInsets.symmetric(horizontal: 2),
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            e['image'],
-                            scale: 20,
-                            fit: BoxFit.cover,
+                      (e) => InkWell(
+                        onTap: () {
+                          _launchInBrowser(e['link']);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 2),
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              e['image'],
+                              scale: 20,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:porto_mobile_app/core/constant/style/app_colors.dart';
 import 'package:porto_mobile_app/model/social_media_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constant/style/app_text.dart';
 
-class FooterTablet extends StatelessWidget {
+class FooterTablet extends StatefulWidget {
   const FooterTablet({super.key});
+
+  @override
+  State<FooterTablet> createState() => _FooterTabletState();
+}
+
+class _FooterTabletState extends State<FooterTablet> {
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +34,11 @@ class FooterTablet extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 10),
-              InkWell(
-                onTap: () {},
-                child: Text(
-                  'Pravasta Rama Fitrayana',
-                  style: AppText.text24.copyWith(
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.w500,
-                  ),
+              Text(
+                'Pravasta Rama Fitrayana',
+                style: AppText.text24.copyWith(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(height: 10),
@@ -35,18 +46,23 @@ class FooterTablet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: SocialMediaModel.listSosmed
                     .map(
-                      (e) => Container(
-                        margin: EdgeInsets.symmetric(horizontal: 2),
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            e['image'],
-                            scale: 20,
-                            fit: BoxFit.cover,
+                      (e) => InkWell(
+                        onTap: () {
+                          _launchInBrowser(e['link']);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 2),
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              e['image'],
+                              scale: 20,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

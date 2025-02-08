@@ -12,7 +12,7 @@ class ProjectModel {
       'name': 'Pravasta Portofolio',
       'category': 'Flutter Web',
       'cover': UrlAssets.imagescover,
-      'link': 'https://github.com/Pravasta/a_restro',
+      'link': 'https://github.com/Pravasta/portofolio',
     },
     {
       'name': 'Movie Mate',

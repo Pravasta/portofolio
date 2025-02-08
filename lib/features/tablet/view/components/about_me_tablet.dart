@@ -3,12 +3,21 @@ import 'package:porto_mobile_app/core/constant/style/app_colors.dart';
 import 'package:porto_mobile_app/core/constant/style/app_text.dart';
 import 'package:porto_mobile_app/core/constant/url_assets/url_assets.dart';
 import 'package:porto_mobile_app/features/tablet/view/widgets/default_button_tablet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutMeTablet extends StatelessWidget {
   const AboutMeTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> launchInBrowser(String url) async {
+      if (!await launchUrl(
+        Uri.parse(url),
+      )) {
+        throw Exception('Could not launch $url');
+      }
+    }
+
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 30,
@@ -77,7 +86,10 @@ class AboutMeTablet extends StatelessWidget {
                         width: 100,
                         borderRadius: 12,
                         padding: 20,
-                        onTap: () {},
+                        onTap: () {
+                          launchInBrowser(
+                              'https://docs.google.com/document/d/1aWWbwP1ed075FOJKzicsNYLz1k-4-qQ9TZXO5t2hdK8/edit?tab=t.0');
+                        },
                       ),
                     ],
                   ),

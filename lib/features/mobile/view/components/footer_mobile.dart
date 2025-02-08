@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:porto_mobile_app/core/constant/style/app_colors.dart';
 import 'package:porto_mobile_app/model/social_media_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constant/style/app_text.dart';
 
-class FooterMobile extends StatelessWidget {
+class FooterMobile extends StatefulWidget {
   const FooterMobile({super.key});
+
+  @override
+  State<FooterMobile> createState() => _FooterMobileState();
+}
+
+class _FooterMobileState extends State<FooterMobile> {
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +47,9 @@ class FooterMobile extends StatelessWidget {
                 children: SocialMediaModel.listSosmed
                     .map(
                       (e) => InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          _launchInBrowser(e['link']);
+                        },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 2),
                           width: 50,
