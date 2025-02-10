@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constant/style/app_colors.dart';
 import '../../../../core/constant/style/app_text.dart';
 
@@ -14,6 +15,14 @@ class ProjectCardWidgetMobile extends StatefulWidget {
 
 class _ProjectCardWidgetMobileState extends State<ProjectCardWidgetMobile> {
   bool isHovered = false;
+
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +64,9 @@ class _ProjectCardWidgetMobileState extends State<ProjectCardWidgetMobile> {
                             ),
                             child: Center(
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _launchInBrowser(widget.data['link']);
+                                },
                                 child: Text(
                                   'See Project',
                                   style: AppText.text14.copyWith(

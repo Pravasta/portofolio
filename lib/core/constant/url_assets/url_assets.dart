@@ -4,6 +4,10 @@ class UrlAssets {
 
   static const String imagesFoto = '$_baseImageAssets/foto.png';
   static const String imagescover = '$_baseImageAssets/cover.png';
+  static const String imagesArestro = '$_baseImageAssets/a_restro.png';
+  static const String imagesDitonton = '$_baseImageAssets/ditonton.png';
+  static const String imagesInstagram = '$_baseImageAssets/instagram.png';
+  static const String imagesMovieMate = '$_baseImageAssets/movie_mate.png';
   static const String imagesCertificationOne =
       '$_baseImageAssets/certification_1.png';
   static const String imagesCertificationTwo =
