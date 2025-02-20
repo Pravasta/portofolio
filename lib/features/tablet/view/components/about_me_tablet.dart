@@ -73,7 +73,8 @@ class AboutMeTablet extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '''I’m a mobile developer and Laravel developer passionate about creating apps that are both functional and user-friendly. I enjoy crafting seamless digital experiences, ensuring that every app I build not only meets technical requirements but also enhances user engagement and satisfaction.
+                        '''A beginner Mobile Programmer who is actively learning and developing mobile applications using Flutter with Laravel as the backend. Passionate about exploring new technologies, building user-friendly applications, and continuously improving skills. Eager to collaborate in a team environment, adapt to challenges, and grow as a developer.
+
                   ''',
                         textAlign: TextAlign.justify,
                         style: AppText.text14.copyWith(
